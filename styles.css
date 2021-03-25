@@ -3,17 +3,14 @@ body{
 }
 #container{
     display: grid;
-    grid-template-columns: repeat(16, 32px);
-    grid-template-rows: repeat(16, 32px);
-    max-width: 512px;
-    height: auto;
+    max-width: 512px ;
+    max-height: 512px ;
     margin: 0 auto;
     background-color: white;
     border: 1px solid black;
 }
 .cell{
-    padding: 1em;
-    border: 1px solid black;
+    border: 1px solid rgb(182, 182, 182);
 }
 .cell:hover{
     background-color: black;
