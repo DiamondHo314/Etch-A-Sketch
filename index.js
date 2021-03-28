@@ -1,5 +1,7 @@
 let containerDiv = document.getElementById("container")
 let click = false
+let eraserBtn = document.getElementById("btnEraser")
+let doodleBtn = document.getElementById("btnDoodle")
 
 function createGrid(length){
     
@@ -13,31 +15,66 @@ function createGrid(length){
         //appends the cells to container div
 
         if(cell){
-          let fill = function(){
-            cell.style.backgroundColor = "black"
-          }
-          
-          cell.addEventListener("mousedown", () =>{
-            click = true
+           function doodle(){
+            
+            let draw = function(){
 
-            cell.style.backgroundColor = "black"
-          })
-          //when mouse is held, click becomes true bgcolor is set again to fill the cell even
-          //when mouse isn't held down, but also works with just a click
-          
-          cell.addEventListener("mouseup", () =>{
-            click = false
-          })
-          //when mouse is released, click becomes false
-          
-          cell.addEventListener("mouseenter", () => {
-            if(click){
-              cell.style.backgroundColor = "black"
+              let fill = function(){
+                if(click){
+                  cell.style.backgroundColor = "black"              
+                }
+              }
+
+              cell.addEventListener("mousedown", () =>{
+                click = true
+
+                cell.style.backgroundColor = "black"
+              })
+              //when mouse is held, click becomes true bgcolor is set again to fill the cell even
+              //when mouse isn't held down, but also works with just a click
+
+              cell.addEventListener("mouseup", () =>{
+                click = false
+              })
+              //when mouse is released, click becomes false
+
+              cell.addEventListener("mouseenter", fill)
+              //this activates when the mouse enters the cells and doodles only when click is true
             }
-          })
-          //this activates when the mouse enters the cells and doodles only when click is true
-          
+
+              doodleBtn.addEventListener("click", draw)
+            }
+            doodle()
+    
+          function eraser(){
+            let erase = function(){
+              //////erase function start//////
+              
+              let makeWhite = function(){
+                if(click){
+                  cell.style.backgroundColor = "white"              
+                }
+              }
+
+              cell.addEventListener("mousedown", () =>{
+                click = true
+
+                cell.style.backgroundColor = "white"
+              })
+
+              cell.addEventListener("mouseup", () =>{
+                click = false
+              })
+              
+              cell.addEventListener("mouseenter", makeWhite)
+            }
+             /////erase function end/////
+            
+            eraserBtn.addEventListener("click", erase)
+            
           }
+          eraser()
+        }
     }
 
     let containerSize = 512;
@@ -49,4 +86,4 @@ function createGrid(length){
     containerDiv.style.gridTemplateRows = `repeat( ${length}, ${cellSize}px)`;
 }
 
-createGrid(64, 64);
+createGrid(16);
